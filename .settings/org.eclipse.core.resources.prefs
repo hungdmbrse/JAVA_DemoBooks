@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/views/book.jsp=UTF-8
+encoding//WebContent/WEB-INF/views/createBookView.jsp=UTF-8
+encoding//src/com/demobookstore/filter/JDBCFilter.java=UTF-8
+encoding//src/com/demobookstore/servlet/BookListServlet.java=UTF-8
+encoding//src/com/demobookstore/servlet/CreateBookServlet.java=UTF-8
+encoding//src/com/demobookstore/servlet/DeleteProductServlet.java=UTF-8
+encoding//src/com/demobookstore/servlet/EditBookServlet.java=UTF-8
+encoding//src/com/demobookstore/servlet/HomeServlet.java=UTF-8
+encoding//src/com/demobookstore/utils/ConnectionUtils.java=UTF-8
+encoding//src/com/demobookstore/utils/DBUtils.java=UTF-8
+encoding//src/com/demobookstore/utils/MySQLConnUtils.java=UTF-8
+encoding//src/com/demobookstore/utils/MyUtils.java=UTF-8
