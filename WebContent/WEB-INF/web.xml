@@ -5,6 +5,9 @@
     <filter-name>jdbcFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <error-page>
+        <location>/views/generalerror.jsp</location>
+    </error-page>
   <welcome-file-list>
     <welcome-file>home</welcome-file>
     <welcome-file>index.jsp</welcome-file>

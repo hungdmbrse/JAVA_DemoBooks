@@ -9,36 +9,30 @@
 <body>
 	<jsp:include page="_header.jsp"></jsp:include>
 	<jsp:include page="_menu.jsp"></jsp:include>
-	<h2>書籍の編集</h2>
+	<h2>感想の編集</h2>
 
-	<form method="POST" action="${pageContext.request.contextPath}/book/add">
-	
+	<form method="POST"
+		action="${pageContext.request.contextPath}/impression/add">
+		<input type="hidden" name="bookid" value="${bookid}">
 		<table>
-			
-			
+
+
 			<tr>
-				<td>書籍名</td>
-				<td><input type="text" name="name" value="${book.name}" ></td>
+				<td>コメント</td>
+				<td><input type="text" name="name" value="${impression.name}"></td>
 			</tr>
-			<tr>
-				<td>出版社名</td>
-				<td><input type="text" name="publisher" value="${book.publisher}"></td>
-			</tr>
-			<tr>
-				<td>ページ数</td>
-				<td><input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="page" value="${book.page}"></td>
-			</tr>
-			
+
+
 			<tr>
 				<td></td>
 				<td><input type="submit" value="Submit"></td>
 			</tr>
 		</table>
 	</form>
-       
-      
-       <a href="${pageContext.request.contextPath}/book">戻る</a>
-      
+
+
+	<a href="${pageContext.request.contextPath}/impression">戻る</a>
+
 	<jsp:include page="_footer.jsp"></jsp:include>
 </body>
 </html>

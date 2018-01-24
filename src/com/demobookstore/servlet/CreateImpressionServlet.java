@@ -12,14 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.demobookstore.beans.Book;
+import com.demobookstore.beans.Impression;
 import com.demobookstore.utils.DBUtils;
 import com.demobookstore.utils.MyUtils;
 
-@WebServlet(urlPatterns = { "/book/add" })
-public class CreateBookServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/impression/add" })
+public class CreateImpressionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public CreateBookServlet() {
+	public CreateImpressionServlet() {
 		super();
 	}
 
@@ -27,9 +28,10 @@ public class CreateBookServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		String bookidStr = (String) request.getParameter("bookid");
+		request.setAttribute("bookid", bookidStr);
 		RequestDispatcher dispatcher = request.getServletContext()
-				.getRequestDispatcher("/WEB-INF/views/createBookView.jsp");
+				.getRequestDispatcher("/WEB-INF/views/createImpressionView.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -40,21 +42,22 @@ public class CreateBookServlet extends HttpServlet {
 			throws ServletException, IOException {
 		Connection conn = MyUtils.getStoredConnection(request);
 
-		String pageStr = (String) request.getParameter("page");
 		String name = (String) request.getParameter("name");
-		String publisher = (String) request.getParameter("publisher");
-		int page = 0;
+		String bookidStr = (String) request.getParameter("bookid");
+		int bookid = 0;
 		try {
-			page = Integer.parseInt(pageStr);
+			bookid = Integer.parseInt(bookidStr);
 		} catch (Exception e) {
 		}
-		Book book = new Book(name, publisher, page);
+		Impression impr = new Impression();
+		impr.setName(name);
+		impr.setBookid(bookid);
 
 		String errorString = null;
 
 		if (errorString == null) {
 			try {
-				DBUtils.insertBook(conn, book);
+				DBUtils.insertImpression(conn, impr);
 			} catch (SQLException e) {
 				e.printStackTrace();
 				errorString = e.getMessage();
@@ -63,18 +66,18 @@ public class CreateBookServlet extends HttpServlet {
 
 		// Lưu thông tin vào request attribute trước khi forward sang views.
 		request.setAttribute("errorString", errorString);
-		request.setAttribute("book", book);
+		request.setAttribute("impression", impr);
 
 		// Nếu có lỗi forward (chuyển tiếp) sang trang 'edit'.
 		if (errorString != null) {
 			RequestDispatcher dispatcher = request.getServletContext()
-					.getRequestDispatcher("/WEB-INF/views/createBookView.jsp");
+					.getRequestDispatcher("/WEB-INF/views/createImpressionView.jsp");
 			dispatcher.forward(request, response);
 		}
 		// Nếu mọi thứ tốt đẹp.
 		// Redirect (chuyển hướng) sang trang danh sách sản phẩm.
 		else {
-			response.sendRedirect(request.getContextPath() + "/book");
+			response.sendRedirect(request.getContextPath() + "/impression?bookid="+bookidStr);
 		}
 	}
 

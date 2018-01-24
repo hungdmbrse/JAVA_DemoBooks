@@ -14,11 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.demobookstore.utils.DBUtils;
 import com.demobookstore.utils.MyUtils;
 
-@WebServlet(urlPatterns = { "/deleteBook" })
-public class DeleteProductServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/deleteImpression" })
+public class DeleteImpressionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public DeleteProductServlet() {
+	public DeleteImpressionServlet() {
 		super();
 	}
 
@@ -28,6 +28,7 @@ public class DeleteProductServlet extends HttpServlet {
 		Connection conn = MyUtils.getStoredConnection(request);
 
 		String idStr = (String) request.getParameter("id");
+		int bookid =0;
 		int id = 0;
 		try {
 			id = Integer.parseInt(idStr);
@@ -36,7 +37,8 @@ public class DeleteProductServlet extends HttpServlet {
 		String errorString = null;
 
 		try {
-			DBUtils.deleteBook(conn, id);
+			bookid = DBUtils.findImpression(conn, id).getBookid();
+			DBUtils.deleteImpression(conn, id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			errorString = e.getMessage();
@@ -54,7 +56,7 @@ public class DeleteProductServlet extends HttpServlet {
 		// Nếu mọi thứ tốt đẹp.
 		// Redirect (chuyển hướng) sang trang danh sách sản phẩm.
 		else {
-			response.sendRedirect(request.getContextPath() + "/book");
+			response.sendRedirect(request.getContextPath() +  "/impression?bookid="+bookid);
 		}
 
 	}

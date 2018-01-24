@@ -18,7 +18,7 @@ public class ConnectionUtils {
 		// Bạn có thể thay thế bởi Database nào đó.
 
 		// MySQL
-		Connection conn = MySQLConnUtils.getMySQLConnection("35.202.231.58", "demo_books", "root", "YeXw.Z2u");
+		Connection conn = MySQLConnUtils.getMySQLConnection("35.202.231.58", "demo_books?useUnicode=yes&characterEncoding=UTF-8", "root", "YeXw.Z2u");
 
 		return conn;
 	}
