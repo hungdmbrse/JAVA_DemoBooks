@@ -14,7 +14,7 @@ public class DBUtils {
 
 	public static Book findBook(Connection conn,  int id) throws SQLException {
 
-		String sql = "Select a.name, a.publisher, a.page from `書籍` a " //
+		String sql = "Select a.name, a.publisher, a.page from `books` a " //
 				+ " where a.id = ?";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
@@ -34,7 +34,7 @@ public class DBUtils {
 
 	public static Impression findImpression(Connection conn, int id) throws SQLException {
 
-		String sql = "Select a.id, a.name, a.book_id from `書籍感想` a "//
+		String sql = "Select a.id, a.name, a.book_id from `impression` a "//
 				+ " where a.id = ? ";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
@@ -53,7 +53,7 @@ public class DBUtils {
 	}
 
 	public static List<Book> queryBook(Connection conn) throws SQLException {
-		String sql = "Select a.id, a.name, a.publisher, a.page from `書籍` a ";
+		String sql = "Select a.id, a.name, a.publisher, a.page from `books` a ";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -71,7 +71,7 @@ public class DBUtils {
 	}
 
 	public static void updateBook(Connection conn, Book book) throws SQLException {
-		String sql = "Update `書籍` set name =?, publisher=?, page=? where id=? ";
+		String sql = "Update `books` set name =?, publisher=?, page=? where id=? ";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -85,14 +85,14 @@ public class DBUtils {
 	
 	public static void insertBook(Connection conn, Book book) throws SQLException {
 		
-		String sql1 = "select max(a.id) from `書籍` a";
+		String sql1 = "select max(a.id) from `books` a";
 
 		PreparedStatement pstm1 = conn.prepareStatement(sql1);
 		ResultSet rs = pstm1.executeQuery();
 		int maxID = rs.getInt(1)+1;
 		pstm1.close();
 		
-		String sql = "Insert into `書籍`(id, name, publisher, page) values (?,?,?,?)";
+		String sql = "Insert into `books`(id, name, publisher, page) values (?,?,?,?)";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -104,7 +104,7 @@ public class DBUtils {
 	}
 
 	public static void deleteBook(Connection conn, int id) throws SQLException {
-		String sql = "Delete From `書籍` where id= ?";
+		String sql = "Delete From `books` where id= ?";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
